@@ -483,7 +483,7 @@
     // }
     
     for (id<NFCNDEFTag> tag in tags) {
-        printf(tag);
+        printf(id);
         [session connectToTag:tag completionHandler:^(NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"connect error: %@", error.localizedDescription);
