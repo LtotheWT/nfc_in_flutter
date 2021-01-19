@@ -488,26 +488,20 @@
                 NSLog(@"connect error: %@", error.localizedDescription);
                 return;
             }
-            NSDictionary* result = [self formatMessageWithIdentifier:@"" message:message];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self->events != nil) {
-                    self->events(result);
-                }
-            });
-//            [tag readNDEFWithCompletionHandler:^(NFCNDEFMessage * _Nullable message, NSError * _Nullable error) {
-//
+            [tag readNDEFWithCompletionHandler:^(NFCNDEFMessage * _Nullable message, NSError * _Nullable error) {
+
 //                if (error != nil) {
 //                    NSLog(@"ERROR: %@", error.localizedDescription);
 //                    return;
 //                }
-//
-//                NSDictionary* result = [self formatMessageWithIdentifier:@"" message:message];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (self->events != nil) {
-//                        self->events(result);
-//                    }
-//                });
-//            }];
+
+                NSDictionary* result = [self formatMessageWithIdentifier:@"" message:message];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (self->events != nil) {
+                        self->events(result);
+                    }
+                });
+            }];
         }];
     }
 }
