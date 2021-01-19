@@ -483,18 +483,18 @@
     // }
     
     for (id<NFCNDEFTag> tag in tags) {
+        printf(tag);
         [session connectToTag:tag completionHandler:^(NSError * _Nullable error) {
             if (error != nil) {
                 NSLog(@"connect error: %@", error.localizedDescription);
                 return;
             }
             [tag readNDEFWithCompletionHandler:^(NFCNDEFMessage * _Nullable message, NSError * _Nullable error) {
-
+                
 //                if (error != nil) {
 //                    NSLog(@"ERROR: %@", error.localizedDescription);
 //                    return;
 //                }
-
                 NSDictionary* result = [self formatMessageWithIdentifier:@"" message:message];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (self->events != nil) {
